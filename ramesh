@@ -1,0 +1,16 @@
+Resources:
+  s3bucketpolicy:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+       BucketName: "s3buckethw"
+  mys3policy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocumnet:
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:GetObject
+            Resource: !Sub 'arn:aws:s3::${s3bucketpolicy}/*'
+      
