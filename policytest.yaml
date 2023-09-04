@@ -1,16 +1,25 @@
+AWSTemplateFormatVersion: 2010-09-09
+
 Resources:
-  s3bucketpolicy:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-       BucketName: "s3buckethw"
-  mys3policy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      PolicyDocumnet:
-        Statement:
-          - Effect: Allow
-            Principal: "*"
-            Action:
-              - s3:GetObject
-            Resource: !Sub 'arn:aws:s3::${s3bucketpolicy}/*'
-      
+  Rameshs3bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: ramesh-stack-polciy
+      PublicAccessBlockConfiguration:
+       BlockPublicAcls: false
+       BlockPublicPolicy: false
+       IgnorePublicAcls: false
+       RestrictPublicBuckets: false
+  
+  RameshBucketPolicy:
+   Type: AWS::S3::BucketPolicy
+   Properties:
+    PolicyDocument:
+      Statement:
+       - Sid : AllowPublicReadAccess
+         Effect: Allow
+         Principal: "*"
+         Action:
+            - 's3:GetObject'
+         Resource: !Sub 'arn:aws:s3:::${Rameshs3bucket}/*'
+    Bucket: !Ref Rameshs3bucket
