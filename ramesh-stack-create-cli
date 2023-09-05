@@ -1,0 +1,11 @@
+AWSTemplateFormartVersion: '2010-09-09'
+
+
+Description: create stack suing AWS CLI commnads 
+
+Resources:
+  S3bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      
